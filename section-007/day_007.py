@@ -10,11 +10,22 @@ placeholder = [ "_" for letter in chosen_word ]
 
 print("".join(placeholder))
 
-while "_" in placeholder:
+lives = 6
+
+while "_" in placeholder and lives != 0:
     guess = input("Guess a letter: ").lower()
     placeholder_position = 0
-    for letter in chosen_word:
-        if guess == letter:
-            placeholder[placeholder_position] = guess
-        placeholder_position += 1
+    if guess in chosen_word:
+        for letter in chosen_word:
+            if guess == letter:
+                placeholder[placeholder_position] = guess
+            placeholder_position += 1
+    else:
+        print(f"Lives left: {lives - 1}")
+        lives -= 1
     print("".join(placeholder))
+
+if lives == 0:
+    print("You lose.")
+else:
+    print("Congratulations!")
